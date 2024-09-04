@@ -63,7 +63,7 @@ export const addNewDietaryData = createAsyncThunk(
 );
 
 // Async thunk to update existing dietary intake data
-export const updateExistingDietaryeData = createAsyncThunk(
+export const updateExistingDietaryData = createAsyncThunk(
   "dietaryIntake/updateExistingDietaryIntakeData",
   async ({ id, newDietaryIntakeData, token }, thunkAPI) => {
     try {
