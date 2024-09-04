@@ -4,7 +4,6 @@ import { selectUser } from "../store/slices/user/auth/userAuthSlice";
 import UserHeader from "../components/user/dashboard/UserHeader";
 import UserSidebar from "../components/user/dashboard/UserSidebar";
 import UserFooter from "../components/user/dashboard/UserFooter";
-import UserDashboard from "../components/user/dashboard/UserDashboard";
 import Steps from "../components/user/dashboard/Steps";
 import DietaryIntake from "../components/user/dashboard/DietaryIntake";
 import Hydration from "../components/user/dashboard/Hydration";

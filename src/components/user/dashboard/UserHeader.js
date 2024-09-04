@@ -132,16 +132,16 @@ const UserHeader = ({ setComponent }) => {
               Steps
             </MenuItem> */}
 
-            {/* <MenuItem
+            <MenuItem
               icon={<FiSun />}
-              onClick={() => setComponent("Dietary")}
+              onClick={() => setComponent("DietaryIntake")}
               _hover={{
                 bg: "customBlue.500",
                 color: "white",
               }}
             >
               Dietary
-            </MenuItem> */}
+            </MenuItem>
 
             <MenuItem
               icon={<FiLogOut />}

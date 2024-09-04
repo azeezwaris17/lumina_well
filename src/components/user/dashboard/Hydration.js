@@ -118,13 +118,13 @@ const HydrationTracker = () => {
 
     try {
       // Dispatch the fetch action
-      const API_response =  await dispatch(
+      const API_response = await dispatch(
         fetchExistingHydrationData(token)
       ).unwrap();
 
-       const hydrationDataArray = API_response.existingHydrationData || [];
+      const hydrationDataArray = API_response.existingHydrationData || [];
 
-          setHydrationData(hydrationDataArray);
+      setHydrationData(hydrationDataArray);
     } catch (error) {
       console.error("Error fetching hydration data:", error);
     }
@@ -447,10 +447,12 @@ const HydrationTracker = () => {
             </Button>
           </Flex>
 
-
           {/*hydration chart and table  */}
-          <Box h={{ base: "800px", md: "600px" }} overflow="scroll">
-
+          <Box
+            h={{ base: "250px", md: "600px" }}
+            w={{ base: "600px", md: "764px" }}
+            overflow="scroll"
+          >
             {/* hydration chart */}
             <Box h={{ base: "250px", md: "400px" }} w="100%" p={4} bg="white">
               <Line
@@ -668,8 +670,6 @@ const HydrationTracker = () => {
           </ModalFooter>
         </ModalContent>
       </Modal>
-
-      
     </Box>
   );
 };

@@ -32,7 +32,7 @@ const UserSidebar = ({ setComponent }) => {
     { icon: FiDroplet, label: "Hydration", component: "Hydration" },
     { icon: FiSmile, label: "Mood", component: "Mood" },
     { icon: FaWeight, label: "Weight", component: "Weight" },
-    // { icon: FiSun, label: "Dietary", component: "DietaryIntake" },
+    { icon: FiSun, label: "Dietary Intake", component: "DietaryIntake" },
   ];
 
   return (
