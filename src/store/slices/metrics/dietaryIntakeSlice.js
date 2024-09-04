@@ -27,7 +27,7 @@ export const fetchExistingDietaryData = createAsyncThunk(
 );
 
 // Async thunk to add new dietary intake data
-export const addNewDietaryIntakeData = createAsyncThunk(
+export const addNewDietaryData = createAsyncThunk(
   "dietaryIntake/addNewDietaryIntakeData",
   async ({ newDietaryIntakeData, token }, thunkAPI) => {
     try {
@@ -63,7 +63,7 @@ export const addNewDietaryIntakeData = createAsyncThunk(
 );
 
 // Async thunk to update existing dietary intake data
-export const updateExistingDietaryIntakeData = createAsyncThunk(
+export const updateExistingDietaryeData = createAsyncThunk(
   "dietaryIntake/updateExistingDietaryIntakeData",
   async ({ id, newDietaryIntakeData, token }, thunkAPI) => {
     try {
@@ -142,7 +142,7 @@ const dietaryIntakeSlice = createSlice({
         state.loading = false;
         state.error = action.payload || "An unknown error occurred"; // Provide a default error message
       })
-      .addCase(addNewDietaryIntakeData.fulfilled, (state, action) => {
+      .addCase(addNewDietaryData.fulfilled, (state, action) => {
         console.log("New Dietary Intake Data Added:", action.payload);
         if (!Array.isArray(state.dietaryIntakeData)) {
           state.dietaryIntakeData = [];
@@ -152,11 +152,11 @@ const dietaryIntakeSlice = createSlice({
         state.loading = false;
         state.error = null;
       })
-      .addCase(addNewDietaryIntakeData.rejected, (state, action) => {
+      .addCase(addNewDietaryData.rejected, (state, action) => {
         console.error("Add New Dietary Intake Data Rejected:", action.payload);
         state.error = action.payload || "An unknown error occurred"; // Provide a default error message
       })
-      .addCase(updateExistingDietaryIntakeData.fulfilled, (state, action) => {
+      .addCase(updateExistingDietaryData.fulfilled, (state, action) => {
         const index = state.dietaryIntakeData.findIndex(
           (entry) => entry._id === action.payload?._id
         );
@@ -193,9 +193,9 @@ export const { resetDietaryIntakeState } = dietaryIntakeSlice.actions;
 
 export const selectAllDietaryIntakeData = (state) =>
   state.dietaryIntake.dietaryIntakeData;
-export const selectDietaryIntakeDataLoading = (state) =>
+export const selectDietaryDataLoading = (state) =>
   state.dietaryIntake.loading;
-export const selectDietaryIntakeDataError = (state) =>
+export const selectDietaryDataError = (state) =>
   state.dietaryIntake.error;
 
 export default dietaryIntakeSlice.reducer;

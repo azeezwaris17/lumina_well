@@ -45,6 +45,15 @@ const UserHeader = ({ setComponent }) => {
       borderColor="customGray.500"
       color="customGray.500"
       p={4}
+      maxW={{ base: "90%", md: "100%" }}
+      overflowX={"scroll"}
+      sx={{
+        "&::-webkit-scrollbar": {
+          display: "none", // Hide scrollbar for WebKit browsers
+        },
+        "-ms-overflow-style": "none", // Hide scrollbar for IE and Edge
+        "scrollbar-width": "none", // Hide scrollbar for Firefox
+      }}
     >
       <Flex justify="space-between" align="center">
         <Flex alignItems="center">

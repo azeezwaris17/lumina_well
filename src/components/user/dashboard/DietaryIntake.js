@@ -443,7 +443,19 @@ const DietaryTracker = () => {
   };
 
   return (
-    <Box p={5} maxW={{ base: "100%", md: "80%", lg: "70%" }} mx="auto">
+    <Box
+      p={5}
+      maxW={{ base: "90%", md: "100%" }}
+      overflowX={"scroll"}
+      sx={{
+        "&::-webkit-scrollbar": {
+          display: "none", // Hide scrollbar for WebKit browsers
+        },
+        "-ms-overflow-style": "none", // Hide scrollbar for IE and Edge
+        "scrollbar-width": "none", // Hide scrollbar for Firefox
+      }}
+      mx="auto"
+    >
       <Heading as="h3" size="lg" mb={4}>
         Hydration Tracker
       </Heading>
@@ -474,7 +486,7 @@ const DietaryTracker = () => {
           <Button
             colorScheme="blue"
             mt={4}
-            onClick={handleFetchExistingDietarData}
+            onClick={handleFetchExistingDietaryData}
             isLoading={loading}
           >
             Try Again
@@ -503,9 +515,26 @@ const DietaryTracker = () => {
           </Flex>
 
           {/*dietary chart and table  */}
-          <Box h={{ base: "800px", md: "600px" }} overflow="scroll">
+          <Box
+            h={{ base: "400px", md: "600px" }}
+            overflowY={"scroll"}
+            w={{ base: "350px", md: "100%" }}
+            overflowX={"scroll"}
+            sx={{
+              "&::-webkit-scrollbar": {
+                display: "none", // Hide scrollbar for WebKit browsers
+              },
+              "-ms-overflow-style": "none", // Hide scrollbar for IE and Edge
+              "scrollbar-width": "none", // Hide scrollbar for Firefox
+            }}
+          >
             {/* dietary chart */}
-            <Box h={{ base: "250px", md: "400px" }} w="100%" p={4} bg="white">
+            <Box
+              h={{ base: "300px", md: "400px" }}
+              w={{ base: "400px", md: "100%" }}
+              p={4}
+              bg="white"
+            >
               <Bar
                 data={chartData}
                 options={{
