@@ -522,7 +522,7 @@ const MoodTracker = () => {
           </Flex>
 
           <Box
-            h={{ base: "400px", md: "600px" }}
+            h={{ base: "400px", md: "500px" }}
             overflowY={"scroll"}
             w={{ base: "350px", md: "100%" }}
             overflowX={"scroll"}
@@ -535,7 +535,7 @@ const MoodTracker = () => {
             }}
           >
             <Box
-              h={{ base: "300px", md: "400px" }}
+              h={{ base: "450px", md: "550px" }}
               w={{ base: "400px", md: "100%" }}
               p={4}
               bg="white"
@@ -543,14 +543,16 @@ const MoodTracker = () => {
               <Bar
                 data={moodChartData}
                 options={moodChartOptions}
-                width={"100%"} // Set the chart width to 100%
+                width={null} // Set the chart width to 100%
                 height={null}
               />
             </Box>
 
+
+{/* table */}
             <TableContainer
-              borderWidth="1px"
-              borderRadius="lg"
+              h={{ base: "450px", md: "550px" }}
+              w={{ base: "400px", md: "100%" }}
               p={4}
               mt={4}
               bg="white"

@@ -662,7 +662,7 @@ const SleepTracker = () => {
         "-ms-overflow-style": "none", // Hide scrollbar for IE and Edge
         "scrollbar-width": "none", // Hide scrollbar for Firefox
       }}
-      mx="auto"
+    
     >
       <Heading as="h3" size="lg" mb={4}>
         Sleep Tracker
@@ -723,7 +723,7 @@ const SleepTracker = () => {
           </Flex>
 
           <Box
-            h={{ base: "400px", md: "600px" }}
+            h={{ base: "400px", md: "500px" }}
             overflowY={"scroll"}
             w={{ base: "350px", md: "100%" }}
             overflowX={"scroll"}
@@ -735,8 +735,10 @@ const SleepTracker = () => {
               "scrollbar-width": "none", // Hide scrollbar for Firefox
             }}
           >
+
+            {/* chart */}
             <Box
-              h={{ base: "300px", md: "400px" }}
+              h={{ base: "450px", md: "550px" }}
               w={{ base: "400px", md: "100%" }}
               p={4}
               bg="white"
@@ -762,15 +764,15 @@ const SleepTracker = () => {
                     },
                   },
                 }}
-                width={"100%"} // Set the chart width to 100%
+                width={null} // Set the chart width to 100%
                 height={null}
               />
             </Box>
 
             {/* Sleep Data Table */}
             <TableContainer
-              borderWidth="1px"
-              borderRadius="lg"
+              h={{ base: "450px", md: "550px" }}
+              w={{ base: "400px", md: "100%" }}
               p={4}
               mt={4}
               bg="white"

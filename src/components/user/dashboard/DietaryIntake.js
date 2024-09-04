@@ -518,7 +518,7 @@ const DietaryTracker = () => {
 
           {/*dietary chart and table  */}
           <Box
-            h={{ base: "400px", md: "600px" }}
+            h={{ base: "400px", md: "500px" }}
             overflowY={"scroll"}
             w={{ base: "350px", md: "100%" }}
             overflowX={"scroll"}
@@ -532,7 +532,7 @@ const DietaryTracker = () => {
           >
             {/* dietary chart */}
             <Box
-              h={{ base: "300px", md: "400px" }}
+              h={{ base: "450px", md: "550px" }}
               w={{ base: "400px", md: "100%" }}
               p={4}
               bg="white"
@@ -543,15 +543,15 @@ const DietaryTracker = () => {
                   maintainAspectRatio: false,
                   responsive: true,
                 }}
-                width={"100%"}
+                width={null}
                 height={null}
               />
             </Box>
 
             {/* dietary data table */}
             <TableContainer
-              borderWidth="1px"
-              borderRadius="lg"
+              h={{ base: "450px", md: "550px" }}
+              w={{ base: "400px", md: "100%" }}
               p={4}
               mt={4}
               bg="white"

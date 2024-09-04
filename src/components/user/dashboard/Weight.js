@@ -386,7 +386,7 @@ const WeightTracker = () => {
           </Flex>
 
           <Box
-            h={{ base: "400px", md: "600px" }}
+            h={{ base: "400px", md: "500px" }}
             overflowY={"scroll"}
             w={{ base: "350px", md: "100%" }}
             overflowX={"scroll"}
@@ -398,8 +398,10 @@ const WeightTracker = () => {
               "scrollbar-width": "none", // Hide scrollbar for Firefox
             }}
           >
+
+            {/* chart */}
             <Box
-              h={{ base: "300px", md: "400px" }}
+              h={{ base: "450px", md: "550px" }}
               w={{ base: "400px", md: "100%" }}
               p={4}
               bg="white"
@@ -437,14 +439,14 @@ const WeightTracker = () => {
                     legend: { display: false },
                   },
                 }}
-                width={"100%"}
+                width={null}
                 height={null}
               />
             </Box>
 
             <TableContainer
-              borderWidth="1px"
-              borderRadius="lg"
+              h={{ base: "450px", md: "550px" }}
+              w={{ base: "400px", md: "100%" }}
               p={4}
               mt={4}
               bg="white"

@@ -422,7 +422,6 @@ const HydrationTracker = () => {
         "-ms-overflow-style": "none", // Hide scrollbar for IE and Edge
         "scrollbar-width": "none", // Hide scrollbar for Firefox
       }}
-      mx="auto"
     >
       <Heading as="h3" size="lg" mb={4}>
         Hydration Tracker
@@ -484,7 +483,7 @@ const HydrationTracker = () => {
 
           {/*hydration chart and table  */}
           <Box
-            h={{ base: "400px", md: "600px" }}
+            h={{ base: "400px", md: "500px" }}
             overflowY={"scroll"}
             w={{ base: "350px", md: "100%" }}
             overflowX={"scroll"}
@@ -500,7 +499,7 @@ const HydrationTracker = () => {
           >
             {/* hydration chart */}
             <Box
-              h={{ base: "300px", md: "400px" }}
+              h={{ base: "450px", md: "550px" }}
               w={{ base: "400px", md: "100%" }}
               p={4}
               bg="white"
@@ -526,16 +525,15 @@ const HydrationTracker = () => {
                   maintainAspectRatio: false, // Allows the chart to fill the container
                   responsive: true, // Ensures the chart adjusts with the container size
                 }}
-                width={"100%"} // Set the chart width to 100%
+                width={null} 
                 height={null} // Let the height be determined by the container
               />
             </Box>
 
             {/* hydration data table */}
             <TableContainer
+              h={{ base: "450px", md: "550px" }}
               w={{ base: "400px", md: "100%" }}
-              borderWidth="1px"
-              borderRadius="lg"
               p={4}
               mt={4}
               bg="white"
