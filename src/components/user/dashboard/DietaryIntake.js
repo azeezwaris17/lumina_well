@@ -35,7 +35,6 @@ import {
 } from "@chakra-ui/react";
 
 import { EditIcon } from "@chakra-ui/icons";
-import { Bar } from "react-chartjs-2";
 import {
   fetchExistingDietaryData,
   addNewDietaryData,
@@ -46,6 +45,29 @@ import {
 } from "../../../store/slices/metrics/dietaryIntakeSlice";
 
 import { DateTime } from "luxon";
+
+import { Bar } from "react-chartjs-2";
+
+import {
+  Chart as ChartJS,
+  Title,
+  Tooltip,
+  Legend,
+  BarElement,
+  CategoryScale,
+  LinearScale,
+} from "chart.js";
+
+ChartJS.register(
+  Title,
+  Tooltip,
+  Legend,
+  BarElement,
+  CategoryScale,
+  LinearScale
+);
+
+
 
 const DietaryTracker = () => {
   const user = useSelector(selectUser);

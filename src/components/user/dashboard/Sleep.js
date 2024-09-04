@@ -37,7 +37,7 @@ import {
 
 import { EditIcon } from "@chakra-ui/icons";
 
-import { Line } from "react-chartjs-2";
+
 import {
   fetchExistingSleepData,
   addNewSleepData,
@@ -49,6 +49,30 @@ import {
 } from "../../../store/slices/metrics/sleepSlice";
 
 import { DateTime } from "luxon";
+
+import { Line } from "react-chartjs-2";
+
+import {
+  Chart as ChartJS,
+  LineElement,
+  PointElement,
+  LinearScale,
+  CategoryScale,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
+
+// Register necessary components
+ChartJS.register(
+  LineElement,
+  PointElement,
+  LinearScale,
+  CategoryScale,
+  Title,
+  Tooltip,
+  Legend
+);
 
 const SleepTracker = () => {
   const user = useSelector(selectUser);

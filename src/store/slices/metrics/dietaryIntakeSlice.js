@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 const API_URL = "/api/metrics/dietaryIntake";
 
 // Async thunk to fetch existing dietary intake data
-export const fetchExistingDietaryIntakeData = createAsyncThunk(
+export const fetchExistingDietaryData = createAsyncThunk(
   "dietaryIntake/fetchExistingDietaryIntakeData",
   async (token, thunkAPI) => {
     try {
@@ -88,7 +88,7 @@ export const updateExistingDietaryIntakeData = createAsyncThunk(
 );
 
 // Async thunk to delete dietary intake data
-export const deleteExistingDietaryIntakeData = createAsyncThunk(
+export const deleteExistingDietaryData = createAsyncThunk(
   "dietaryIntake/deleteExistingDietaryIntakeData",
   async ({ id, token }, thunkAPI) => {
     try {
@@ -126,18 +126,18 @@ const dietaryIntakeSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchExistingDietaryIntakeData.pending, (state) => {
+      .addCase(fetchExistingDietaryData.pending, (state) => {
         state.status = "loading";
         state.loading = true;
         state.error = null;
       })
-      .addCase(fetchExistingDietaryIntakeData.fulfilled, (state, action) => {
+      .addCase(fetchExistingDietaryData.fulfilled, (state, action) => {
         state.status = "succeeded";
         state.dietaryIntakeData = action.payload || []; // Ensure payload is an array
         state.loading = false;
         state.error = null;
       })
-      .addCase(fetchExistingDietaryIntakeData.rejected, (state, action) => {
+      .addCase(fetchExistingDietaryData.rejected, (state, action) => {
         state.status = "failed";
         state.loading = false;
         state.error = action.payload || "An unknown error occurred"; // Provide a default error message
@@ -164,12 +164,12 @@ const dietaryIntakeSlice = createSlice({
           state.dietaryIntakeData[index] = action.payload || {}; // Ensure payload is an object
         }
       })
-      .addCase(deleteExistingDietaryIntakeData.pending, (state) => {
+      .addCase(deleteExistingDietaryData.pending, (state) => {
         state.status = "loading";
         state.loading = true;
         state.error = null;
       })
-      .addCase(deleteExistingDietaryIntakeData.fulfilled, (state, action) => {
+      .addCase(deleteExistingDietaryData.fulfilled, (state, action) => {
         if (Array.isArray(state.dietaryIntakeData)) {
           state.dietaryIntakeData = state.dietaryIntakeData.filter(
             (entry) => entry._id !== action.payload
@@ -181,7 +181,7 @@ const dietaryIntakeSlice = createSlice({
         state.loading = false;
         state.error = null;
       })
-      .addCase(deleteExistingDietaryIntakeData.rejected, (state, action) => {
+      .addCase(deleteExistingDietaryData.rejected, (state, action) => {
         state.status = "failed";
         state.loading = false;
         state.error = action.payload || "Failed to delete dietary intake data";

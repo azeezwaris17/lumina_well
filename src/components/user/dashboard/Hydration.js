@@ -35,7 +35,6 @@ import {
   Spinner,
 } from "@chakra-ui/react";
 import { EditIcon } from "@chakra-ui/icons";
-import { Line } from "react-chartjs-2";
 import {
   fetchExistingHydrationData,
   addNewHydrationData,
@@ -46,6 +45,30 @@ import {
   selectHydrationDataError,
 } from "../../../store/slices/metrics/hydrationSlice";
 import { DateTime } from "luxon";
+
+import { Line } from "react-chartjs-2";
+
+import {
+  Chart as ChartJS,
+  LineElement,
+  PointElement,
+  LinearScale,
+  CategoryScale,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
+
+// Register necessary components
+ChartJS.register(
+  LineElement,
+  PointElement,
+  LinearScale,
+  CategoryScale,
+  Title,
+  Tooltip,
+  Legend
+);
 
 const HydrationTracker = () => {
   const user = useSelector(selectUser);
@@ -449,8 +472,8 @@ const HydrationTracker = () => {
 
           {/*hydration chart and table  */}
           <Box
-            h={{ base: "250px", md: "600px" }}
-            w={{ base: "600px", md: "764px" }}
+            maxH={{ base: "400px", md: "600px" }}
+            maxW={{ base: "600px", md: "700px" }}
             overflow="scroll"
           >
             {/* hydration chart */}

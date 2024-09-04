@@ -35,7 +35,7 @@ import {
   HStack,
 } from "@chakra-ui/react";
 import { EditIcon } from "@chakra-ui/icons";
-import { Line } from "react-chartjs-2";
+
 import {
   fetchExistingWeightData,
   addNewWeightData,
@@ -45,7 +45,32 @@ import {
   selectWeightDataLoading,
   selectWeightDataError,
 } from "../../../store/slices/metrics/weightSlice";
+
 import { DateTime } from "luxon";
+
+import { Line } from "react-chartjs-2";
+
+import {
+  Chart as ChartJS,
+  LineElement,
+  PointElement,
+  LinearScale,
+  CategoryScale,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
+
+// Register necessary components
+ChartJS.register(
+  LineElement,
+  PointElement,
+  LinearScale,
+  CategoryScale,
+  Title,
+  Tooltip,
+  Legend
+);
 
 const WeightTracker = () => {
   const user = useSelector(selectUser);

@@ -34,7 +34,7 @@ import {
   InputRightElement
 } from "@chakra-ui/react";
 import { EditIcon } from "@chakra-ui/icons";
-import { Bar } from "react-chartjs-2";
+
 import {
   fetchExistingMoodData,
   addNewMoodData,
@@ -44,7 +44,11 @@ import {
   selectMoodDataLoading,
   selectMoodDataError,
 } from "../../../store/slices/metrics/moodSlice";
+
 import { DateTime } from "luxon";
+
+import { Bar } from "react-chartjs-2";
+
 import {
   Chart as ChartJS,
   Title,
