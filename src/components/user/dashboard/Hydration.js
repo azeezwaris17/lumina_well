@@ -473,8 +473,9 @@ const HydrationTracker = () => {
           {/*hydration chart and table  */}
           <Box
             h={{ base: "400px", md: "600px" }}
-            w={{ base: "600px", md: "700px" }}
-            overflow="scroll"
+            overflowY={"scroll"}
+            w={{ base: "300px", md: "700px" }}
+            overflowX={"scroll"}
           >
             {/* hydration chart */}
             <Box h={{ base: "250px", md: "400px" }} w="100%" p={4} bg="white">
