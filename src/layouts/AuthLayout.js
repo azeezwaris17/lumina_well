@@ -1,5 +1,5 @@
 // src/layouts/AuthLayout.js
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import Link from "next/link";
 import {
   Container,
@@ -25,49 +25,49 @@ const AuthLayout = ({ heading = "", form, role }) => {
   const quotes = useSelector(selectAllQuotes);
   const loading = useSelector((state) => state.quotes?.loading);
   const error = useSelector((state) => state.quotes?.error);
-
-  const [quotesData, setQuotesData] = useState([]);
   const [currentQuoteIndex, setCurrentQuoteIndex] = useState(0);
 
+  // Memoized quote fetching to prevent unnecessary re-renders
+  const fetchQuotesData = useCallback(async () => {
+    try {
+      const resultAction = await dispatch(fetchQuotes());
+      if (fetchQuotes.fulfilled.match(resultAction)) {
+        return resultAction.payload;
+      } else {
+        throw new Error(resultAction.error?.message || "Failed to fetch quotes");
+      }
+    } catch (err) {
+      console.error("Error fetching quotes:", err);
+      toast({
+        title: "Failed to load quotes",
+        description: "Please try again later.",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+      return [];
+    }
+  }, [dispatch, toast]);
+
+  // Fetch quotes only once on component mount
   useEffect(() => {
     if (quotes.length === 0) {
-      console.log("Fetching quotes...");
-      dispatch(fetchQuotes())
-        .unwrap()
-        .then((fetchedQuotes) => {
-          setQuotesData(fetchedQuotes);
-        })
-        .catch((err) => {
-          console.error("Error fetching quotes:", err);
-          toast({
-            title: "Failed to load quotes",
-            description: "Please try again later.",
-            status: "error",
-            duration: 5000,
-            isClosable: true,
-          });
-        });
-    } else {
-      setQuotesData(quotes);
+      fetchQuotesData();
     }
-  }, [dispatch, toast, quotes]);
+  }, [fetchQuotesData, quotes.length]);
 
+  // Set up quote rotation interval
   useEffect(() => {
-    if (quotesData.length > 0) {
+    if (quotes.length > 1) {
       const intervalId = setInterval(() => {
-        setCurrentQuoteIndex(
-          (prevIndex) => (prevIndex + 1) % quotesData.length
-        );
-      }, 3000);
+        setCurrentQuoteIndex((prevIndex) => (prevIndex + 1) % quotes.length);
+      }, 5000); // Increased to 5 seconds for better UX
 
       return () => clearInterval(intervalId);
     }
-  }, [quotesData]);
+  }, [quotes.length]); // Only depend on quotes.length
 
-  const currentQuote =
-    quotesData && quotesData.length > 0 ? quotesData[currentQuoteIndex] : null;
-
-  // console.log(currentQuote);
+  const currentQuote = quotes.length > 0 ? quotes[currentQuoteIndex] : null;
 
   return (
     <Grid
@@ -80,10 +80,20 @@ const AuthLayout = ({ heading = "", form, role }) => {
       {/* Quote Section */}
       <GridItem w="100%" display={{ base: "none", md: "block" }}>
         <Container centerContent>
-          {loading && <p>Just be fine...</p>}
-          {error && <p>Stay healthy! {error}</p>}
-          {!loading && !error && currentQuote && (
-            <Box w="full" maxW="md" p={8}>
+          <Box w="full" maxW="md" p={8}>
+            {loading && (
+              <Text fontSize="lg" textAlign="center">
+                Loading inspirational quotes...
+              </Text>
+            )}
+            
+            {error && (
+              <Text fontSize="lg" textAlign="center" color="red.500">
+                Stay positive! {error}
+              </Text>
+            )}
+            
+            {!loading && !error && currentQuote && (
               <Center>
                 <Flex flexDirection="column">
                   <Text fontSize="lg" fontWeight="bold" textAlign="center">
@@ -94,8 +104,14 @@ const AuthLayout = ({ heading = "", form, role }) => {
                   </Text>
                 </Flex>
               </Center>
-            </Box>
-          )}
+            )}
+            
+            {!loading && !error && quotes.length === 0 && (
+              <Text fontSize="lg" textAlign="center">
+                No quotes available
+              </Text>
+            )}
+          </Box>
         </Container>
       </GridItem>
 
@@ -113,21 +129,22 @@ const AuthLayout = ({ heading = "", form, role }) => {
 
             {/* Form component */}
             {form}
+            
             <Stack spacing={4} mt={6}>
               {heading.includes("Login") ? (
                 <>
                   <Text fontSize="sm" color="gray.600">
                     Don&apos;t have an account yet?{" "}
-                    <Link href={`/auth/register/${role}`} passHref>
-                      <Button variant="link" colorScheme="customBlue">
+                    <Link href={`/auth/register/${role}`} passHref legacyBehavior>
+                      <Button as="a" variant="link" colorScheme="customBlue">
                         Register
                       </Button>
                     </Link>
                   </Text>
                   <Text fontSize="sm" color="gray.600">
                     Forgot password?{" "}
-                    <Link href={`/auth/reset-password/${role}`} passHref>
-                      <Button variant="link" colorScheme="customBlue">
+                    <Link href={`/auth/reset-password/${role}`} passHref legacyBehavior>
+                      <Button as="a" variant="link" colorScheme="customBlue">
                         Reset
                       </Button>
                     </Link>
@@ -136,8 +153,8 @@ const AuthLayout = ({ heading = "", form, role }) => {
               ) : (
                 <Text fontSize="sm" color="gray.600">
                   Already registered?{" "}
-                  <Link href={`/auth/login/${role}`} passHref>
-                    <Button variant="link" colorScheme="customBlue">
+                  <Link href={`/auth/login/${role}`} passHref legacyBehavior>
+                    <Button as="a" variant="link" colorScheme="customBlue">
                       Login
                     </Button>
                   </Link>
@@ -151,4 +168,4 @@ const AuthLayout = ({ heading = "", form, role }) => {
   );
 };
 
-export default AuthLayout;
+export default React.memo(AuthLayout);
